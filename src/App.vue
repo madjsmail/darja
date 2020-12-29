@@ -1,30 +1,168 @@
 <template>
   <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <nav class="navbar">
+      <div class="div_logo">
+        <img src="../src/assets/Plandetravail17@3x.png" alt="LOGO" srcset="" />
+        <h2 class="logo">         
+AwalNa</h2>
+      </div>
+      <a
+        href="#"
+        :class="active ? 'menu-btn menu-btn--active' : 'menu-btn'"
+        @click="active = !active"
+      ></a>
+      <ul :class="active ? 'active' : ''">
+        <li><router-link to="/">Home</router-link></li>
+        <li><router-link to="/Search">search</router-link></li>
+        <li><router-link to="/Form">Form</router-link></li>
+        <li><router-link to="/about">About</router-link></li>
+      </ul>
+    </nav>
   </div>
-  <router-view/>
+  <router-view />
 </template>
 
+<script>
+export default {
+  data() {
+    return {
+      active: 0,
+    };
+  },
+  methods: {
+    // toggle(){
+    //   alert('madjid');
+    // }
+  },
+};
+</script>
+
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+// #app {
+//   font-family: Avenir, Helvetica, Arial, sans-serif;
+//   -webkit-font-smoothing: antialiased;
+//   -moz-osx-font-smoothing: grayscale;
+//   text-align: center;
+//   color: #2c3e50;
+// }
+nav {
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+  position: relative;
+  width: 90vw;
+  margin: 1em auto;
+  font-family: "Poppins", sans-serif;
+  .div_logo {
+    display: flex;
+  }
 
-#nav {
-  padding: 30px;
+  img {
+    display: none;
+    max-width: 150px;
+    
+  }
+  .logo {
+    font-size: 2em;
+    font-family: "Comfortaa", cursive;
+  }
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+  ul {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    right: 0;
+    top: 3em;
+    //background-color: rgb(14, 14, 14);
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    align-content: center;
+    transition: transform 0.4s ease-in;
+    color: rgba(255, 255, 255, 0);
+    transform: translateX(600px);
+    &.active {
+      transform: translateX(0);
+    }
 
-    &.router-link-exact-active {
-      color: #42b983;
+    li {
+      display: flex;
+
+      margin: 0 2em 0 auto;
     }
   }
+}
+@media (min-width: 900px) {
+  nav {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    .div_logo {
+      display: flex;
+    }
+
+    img {
+      display: inline;
+      // max-width: 100px;
+    }
+    .logo {
+      font-size: 2em;
+      font-family: "Comfortaa", cursive;
+      display: flex;
+      align-items: flex-end;
+
+
+      
+    }
+
+    ul {
+      list-style: none;
+      display: flex;
+      flex-direction: row;
+      transform: translateX(0px);
+
+
+      li {
+        display: flex;
+
+        margin: 0 2em 0 auto;
+      }
+    }
+  }
+  .menu-btn {
+    display: none !important;
+  }
+}
+
+.menu-btn {
+  display: block;
+  right: 1em;
+  bottom: 1em;
+
+  position: absolute;
+  top: 50%;
+  width: 36px;
+  transform: translate(-50%, -50%);
+}
+
+.menu-btn:before,
+.menu-btn:after {
+  background-color: #fff;
+  content: "";
+  display: block;
+  height: 4px;
+  transition: all 200ms ease-in-out;
+}
+.menu-btn:before {
+  box-shadow: 0 10px 0 #fff;
+  margin-bottom: 16px;
+}
+.menu-btn--active:before {
+  box-shadow: 0 0 0 #fff;
+  transform: translateY(10px) rotate(45deg);
+}
+.menu-btn--active:after {
+  transform: translateY(-10px) rotate(-45deg);
 }
 </style>

@@ -22,3 +22,6 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+[vuejs-medium-editor](https://github.com/manuelgeek/vuejs-medium-editor)
