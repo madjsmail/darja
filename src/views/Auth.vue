@@ -11,7 +11,7 @@ import firebase from "firebase/app";
 import db from "../firebase/init";
 import router from "../router";
 var provider = new firebase.auth.GoogleAuthProvider();
-provider.addScope("https://www.googleapis.com/auth/contacts.readonly");
+//provider.addScope("https://www.googleapis.com/auth/contacts.readonly");
 
 export default {
   methods: {
@@ -25,26 +25,29 @@ export default {
           // The signed-in user info.
           var user = result.user;
           // ...
-          console.log(token, user)
+          console.log(token, user);
 
-            const Users = db.collection('Users').doc(user.displayName.toLowerCase());
-            const doc =  Users.get();
-                
-            if (!doc.exists) {
-                Users
-                  .set({
-                    user: user.displayName.toLowerCase(),
-                    photoUrl: user.photoURL,
-                    word: [],
-                    contribution: 0,
-                  });
+          var Users = db
+            .collection("Users")
+            .doc(user.displayName.toLowerCase());
 
-            } else {
-               //lol
-            }
-
-  
-
+          Users.get()
+            .then(function(doc) {
+              if (doc.exists) {
+                console.log("Document data:", doc.data());
+              } else {
+                // doc.data() will be undefined in this case
+                Users.set({
+                  user: user.displayName.toLowerCase(),
+                  photoUrl: user.photoURL,
+                  word: [],
+                  contribution: 0,
+                });
+              }
+            })
+            .catch(function(error) {
+              console.log("Error getting document:", error);
+            });
 
           router.push({
             name: "Form",

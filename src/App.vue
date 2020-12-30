@@ -14,8 +14,8 @@ AwalNa</h2>
       <ul :class="active ? 'active' : ''">
         <li><router-link to="/">Home</router-link></li>
         <li><router-link to="/Search">search</router-link></li>
-        <li><router-link to="/Form">Form</router-link></li>
-        <li><router-link to="/about">About</router-link></li>
+        <li><router-link to="/Form">contribute</router-link></li>
+        <!-- <li><router-link to="/about">About</router-link></li> -->
       </ul>
     </nav>
   </div>

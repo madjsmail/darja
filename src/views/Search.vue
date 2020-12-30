@@ -11,86 +11,94 @@
       </form>
     </header>
     <main class="search">
+          <div  class="feedback" v-if="filterWord.length == 0">
+              <p>no results found</p>
+          </div>
+          <div  class="feedback" v-if="filterWord.length != 0">
+              <p>
+                {{filterWord.length }}
+                results found
+              </p>
+          </div>
+
       <div v-for="(word, index) in filterWord" v-bind:key="index" class="card">
         <div class="card_title">
           <h3>{{ word.Word }}</h3>
-           <span> {{ word.Synonyms }} </span>   
+          <span> {{ word.Synonyms }} </span>
         </div>
-        <hr>
-        <div class="card_content" v-html="word.definition.slice(0,100)">
-            
-        </div>
-        <router-link  v-bind:to="{name:'word' ,
-         params:{
-          Word :  word.Word,
-          Origin :word.Origin,
-          definition :word.definition,
-          Synonyms :word.Synonyms,
-          Willaya :word.Willaya,
-           
-           
-           }}">See More</router-link>
+        <hr />
+        <div class="card_content" v-html="word.definition.slice(0, 100)"></div>
+        <router-link
+          v-bind:to="{
+            name: 'word',
+            params: {
+              Word: word.Word,
+              Origin: word.Origin,
+              definition: word.definition,
+              Synonyms: word.Synonyms,
+              Willaya: word.Willaya,
+            },
+          }"
+          >See More</router-link
+        >
       </div>
     </main>
   </div>
 </template>
 
 <script>
-
-import  db from "../firebase/init";
+import db from "../firebase/init";
 
 export default {
   name: "Search",
-  data : function() {
-return {
-
-      SEARCH : '' ,
-      AllWords : [],
-      filterWord : []
-
-};
-},
+  data: function() {
+    return {
+      SEARCH: "",
+      feedback: "",
+      AllWords: [],
+      filterWord: [],
+    };
+  },
   methods: {
-    searchedWord(){
-
-var filterword = []
- this.AllWords.map(element => {
-
-  if (element.Word.match(this.SEARCH) ||element.definition.match(this.SEARCH) || element.Synonyms.match(this.SEARCH) || element.Origin.match(this.SEARCH)) {
-    filterword.push(element)
-  }
-  
-});
-this.filterWord = filterword ;
-    }
- 
-
-    
+    searchedWord() {
+      if (this.SEARCH) {
+        var filterword = [];
+        this.AllWords.map((element) => {
+          if (
+            element.Word.match(this.SEARCH.toLowerCase()) ||
+            element.definition.match(this.SEARCH.toLowerCase()) ||
+            element.Synonyms.match(this.SEARCH.toLowerCase()) ||
+            element.Origin.match(this.SEARCH.toLowerCase())
+          ) {
+            filterword.push(element);
+          }
+        });
+        this.filterWord = filterword;
+      }else{
+        //
+      }
+    },
   },
   mounted() {
-    var Words = []
-    db.collection("Words").get().then(function(querySnapshot) {
-    querySnapshot.forEach(function(doc) {
-        // doc.data() is never undefined for query doc snapshots
-        //console.log(doc.id, " => ", doc.data());
-        Words.push({
-          'Word' :  doc.data().Word,
-          'Origin' :doc.data().Origin,
-          'definition' :doc.data().definition,
-          'Synonyms' :doc.data().Synonyms,
-          'Willaya' :doc.data().Willaya,
-        })
-
-    });
-});
-this.AllWords = Words
+    var Words = [];
+    db.collection("Words")
+      .get()
+      .then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+          // doc.data() is never undefined for query doc snapshots
+          //console.log(doc.id, " => ", doc.data());
+          Words.push({
+            Word: doc.data().Word,
+            Origin: doc.data().Origin,
+            definition: doc.data().definition,
+            Synonyms: doc.data().Synonyms,
+            Willaya: doc.data().Willaya,
+          });
+        });
+      });
+    this.AllWords = Words;
   },
-
-
-
-
-  
-}
+};
 </script>
 
 <style scoped lang="scss">
@@ -126,15 +134,22 @@ header {
   width: 100vw;
   display: flex;
   flex-direction: column;
+  //justify-content: space-between;
+  .feedback{
+     //margin: 1em auto;
+    font-size: 22px;
+    text-align: center;
+  }
 
   .card {
     font-weight: 500;
     margin: 1em auto;
+    position: relative;
     // background-color: #7c052d;
     background-color: #181818;
     color: #ffffff;
-    padding: 1em;
-    height: 190px;
+    padding: 0.5em 1em;
+    height: 200px;
     overflow: hidden;
     width: 70vw;
     border-radius: 5px;
@@ -148,6 +163,12 @@ header {
     .card_content {
       width: 80%;
     }
+
+    a{
+      color: rgb(117, 117, 117);
+      position: absolute;
+      bottom: 0.4em;
+text-decoration: underline;      }
   }
 }
 </style>

@@ -1,7 +1,13 @@
 <template>
+  <div class="success_msg" v-if="success">
+    <p>
+      {{ this.success }}
+    </p>
+  </div>
   <div class="error_msg" v-if="feedback">
-    <p>you can't submit empty input</p>
-    <p><sup>(*)</sup> is required</p>
+    <p>
+      {{ this.feedback }}
+    </p>
   </div>
   <div @submit.prevent class="form_container">
     <div class="input">
@@ -45,6 +51,7 @@ export default {
       user: firebase.auth().currentUser.displayName.toLowerCase(),
       photoUrl: firebase.auth().currentUser.photoURL,
       Word: "",
+      success: "",
       Origin: "",
       Synonyms: "",
       definition: "",
@@ -71,20 +78,18 @@ export default {
             console.error("Error writing document: ", error);
           });
 
+ 
+
         const increment = firebase.firestore.FieldValue.increment(1);
-       // const decrement = firebase.firestore.FieldValue.increment(-1);
+        // const decrement = firebase.firestore.FieldValue.increment(-1);
 
         const userCount = db.collection("Users").doc(this.user);
-        userCount.update({contribution : increment})
+        userCount.update({ contribution: increment });
 
-       //  userCount.set({word: [this.Word]} ,  { merge: true }) 
-       userCount.update({
-    word: firebase.firestore.FieldValue.arrayUnion(this.Word)
-}); 
-
-
-
-
+        //  userCount.set({word: [this.Word]} ,  { merge: true })
+        userCount.update({
+          word: firebase.firestore.FieldValue.arrayUnion(this.Word),
+        });
 
         this.feedback = "";
 
@@ -93,6 +98,7 @@ export default {
         this.Synonyms = "";
         this.definition = "";
         this.Willaya = "";
+        this.success = "data saved , thank you for contributing ";
       } else {
         this.feedback = "you need to fille the inputs";
       }
@@ -113,9 +119,30 @@ sup {
 }
 .error_msg {
   width: 60vw;
+  height: 60px;
   margin: 2em auto;
-  text-align: center;
-  background-color: #800f0f;
-  border-radius: 9px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-content: center;
+  background-color: #f8d7da;
+  color: #721c24;
+  border-radius: 4px;
+  font-size: 18px;
+  line-height: 24px;
+}
+.success_msg {
+  width: 60vw;
+  height: 60px;
+  margin: 2em auto;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-content: center;
+  background-color: #d4edda;
+  color: #155724;
+  border-radius: 4px;
+  font-size: 18px;
+  line-height: 24px;
 }
 </style>
