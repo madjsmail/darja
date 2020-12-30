@@ -1,5 +1,5 @@
 <template>
-  <div class="success_msg" v-if="success">
+  <div class="success_msg" v-if="success && !feedback">
     <p>
       {{ this.success }}
     </p>
@@ -69,7 +69,7 @@ export default {
             Origin: this.Origin.toLowerCase(),
             Synonyms: this.Synonyms.toLowerCase(),
             definition: this.definition.toLowerCase(),
-            Willaya: this.definition.toLowerCase(),
+            Willaya: this.Willaya.toLowerCase(),
           })
           .then(function() {
             console.log("Document successfully written!");
@@ -77,8 +77,6 @@ export default {
           .catch(function(error) {
             console.error("Error writing document: ", error);
           });
-
- 
 
         const increment = firebase.firestore.FieldValue.increment(1);
         // const decrement = firebase.firestore.FieldValue.increment(-1);
@@ -98,9 +96,9 @@ export default {
         this.Synonyms = "";
         this.definition = "";
         this.Willaya = "";
-        this.success = "data saved , thank you for contributing ";
+        this.success = "data saved ✔ , thank you for contributing ";
       } else {
-        this.feedback = "you need to fille the inputs";
+        this.feedback = " ⛔ you need to fille the inputs ";
       }
     },
   },
@@ -142,7 +140,7 @@ sup {
   background-color: #d4edda;
   color: #155724;
   border-radius: 4px;
-  font-size: 18px;
+  font-size: 1px;
   line-height: 24px;
 }
 </style>

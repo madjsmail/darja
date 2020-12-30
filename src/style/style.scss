@@ -210,10 +210,16 @@ header {
   .word {
     font-size: 2em;
     font-weight: 600;
+    h2{
+      color: #00AAA9;
+      text-transform:capitalize ;
+    }
   }
 
   strong {
     font-size: 1.5em;
+    text-transform:capitalize ;
+
   }
 
   hr {
@@ -303,11 +309,12 @@ header {
   }
 
   .home_page {
-    width: 75vw;
+    width: 80vw;
 
     img {
       display: flex;
       max-width: 17em;
+      margin-right: 1em;
     }
 
     .info {
@@ -398,24 +405,13 @@ header {
   .home_page {
     // width: 60vw;
     width: fit-content;
-    // img{
-    //   display: flex;
+    img{
+      margin-right: 2em;
+    }
+    .info{
+      margin-left: 1.7em;
 
-    //   max-width: 17em;
-    // }
-    // .info{
-    //   text-align: left !important;
-    //   max-width: 40vw;
-    //   margin-left: 1em;
-    //   align-items: baseline;
-    //  h2{
-    //   line-height: 1em;
-    //  }
-    //  p{
-    //    line-height: 1.5em;
-    //  }
-
-    // }
+    }
   }
 
 }

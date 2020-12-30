@@ -11,15 +11,17 @@
       </form>
     </header>
     <main class="search">
-          <div  class="feedback" v-if="filterWord.length == 0">
-              <p>no results found</p>
-          </div>
-          <div  class="feedback" v-if="filterWord.length != 0">
-              <p>
-                {{filterWord.length }}
-                results found
-              </p>
-          </div>
+      <div v-if="feedback_search">
+        <div class="feedback" v-if="filterWord.length == 0">
+          <p>no results found</p>
+        </div>
+        <div class="feedback" v-if="filterWord.length != 0">
+          <p>
+            {{ filterWord.length }}
+            results found
+          </p>
+        </div>
+      </div>
 
       <div v-for="(word, index) in filterWord" v-bind:key="index" class="card">
         <div class="card_title">
@@ -33,11 +35,12 @@
             name: 'word',
             params: {
               Word: word.Word,
-              Origin: word.Origin,
+             /* Origin: word.Origin,
               definition: word.definition,
               Synonyms: word.Synonyms,
-              Willaya: word.Willaya,
+              Willaya: word.Willaya,*/
             },
+            query: { myprop: word.Word }
           }"
           >See More</router-link
         >
@@ -53,6 +56,7 @@ export default {
   name: "Search",
   data: function() {
     return {
+      feedback_search: false,
       SEARCH: "",
       feedback: "",
       AllWords: [],
@@ -74,8 +78,9 @@ export default {
           }
         });
         this.filterWord = filterword;
-      }else{
-        //
+        this.feedback_search = true;
+      } else {
+        this.feedback_search = false;
       }
     },
   },
@@ -135,8 +140,8 @@ header {
   display: flex;
   flex-direction: column;
   //justify-content: space-between;
-  .feedback{
-     //margin: 1em auto;
+  .feedback {
+    //margin: 1em auto;
     font-size: 22px;
     text-align: center;
   }
@@ -164,11 +169,12 @@ header {
       width: 80%;
     }
 
-    a{
+    a {
       color: rgb(117, 117, 117);
       position: absolute;
       bottom: 0.4em;
-text-decoration: underline;      }
+      text-decoration: underline;
+    }
   }
 }
 </style>

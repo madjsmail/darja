@@ -3,8 +3,9 @@
     <nav class="navbar">
       <div class="div_logo">
         <img src="../src/assets/Plandetravail17@3x.png" alt="LOGO" srcset="" />
-        <h2 class="logo">         
-AwalNa</h2>
+        <h2 class="logo">
+          AwalNa
+        </h2>
       </div>
       <a
         href="#"
@@ -60,7 +61,6 @@ nav {
   img {
     display: none;
     max-width: 150px;
-    
   }
   .logo {
     font-size: 2em;
@@ -111,9 +111,6 @@ nav {
       font-family: "Comfortaa", cursive;
       display: flex;
       align-items: flex-end;
-
-
-      
     }
 
     ul {
@@ -121,7 +118,6 @@ nav {
       display: flex;
       flex-direction: row;
       transform: translateX(0px);
-
 
       li {
         display: flex;
