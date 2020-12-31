@@ -7,42 +7,63 @@
     </header>
     <section class="grid-container">
       <div class="definition">
-        <i>
-          <strong> definition </strong>
-        </i>
+        <header>
+          <i>
+            <strong> definition </strong>
+          </i>
+          <i>
+            <strong> تعريف </strong>
+          </i>
+        </header>
         <p v-if="definition" v-html="definition"></p>
         <p v-else>no definition available</p>
       </div>
 
       <div class="synonyms">
-        <i>
-          <strong> synonyms </strong>
-        </i>
+        <header>
+          <i>
+            <strong> synonyms </strong>
+          </i>
+          <i>
+            <strong> المرادفات </strong>
+          </i>
+        </header>
         <p v-if="Synonyms" v-html="Synonyms"></p>
         <p v-else>no Synonyms available</p>
       </div>
       <div class="origine">
-        <i>
-          <strong> origine </strong>
-        </i>
+        <header>
+          <i>
+            <strong> origine </strong>
+          </i>
+          <i>
+            <strong> الأصل </strong>
+          </i>
+        </header>
+
         <p v-if="Origin" v-html="Origin"></p>
         <p v-else>no data available</p>
       </div>
 
       <div class="willaya">
-        <i>
-          <strong> willaya </strong>
-        </i>
+        <header>
+          <i>
+            <strong> willaya </strong>
+          </i>
+          <i>
+            <strong> ولاية </strong>
+          </i>
+        </header>
         <p v-if="Willaya" v-html="Willaya"></p>
         <p v-else>no Synonyms available</p>
       </div>
-      <div class="exampl">
+      <!-- <div class="exampl">
         <i>
           <strong> examples </strong>
         </i>
         <p v-if="Synonyms" v-html="Synonyms"></p>
         <p v-else>no Synonyms available</p>
-      </div>
+      </div> -->
     </section>
   </div>
 </template>
@@ -55,7 +76,7 @@ export default {
   props: {},
   data() {
     return {
-      Word: this.$route.query.word,
+      Word: this.$route.query.word.toLowerCase(),
       Origin: null,
       definition: null,
       Synonyms: null,
@@ -65,9 +86,9 @@ export default {
   mounted() {
     var thias = this;
     db.collection("Words")
-      .doc(this.Word)
+      .doc(this.Word.toLowerCase())
       .get()
-      .then(function (doc) {
+      .then(function(doc) {
         if (doc.exists) {
           thias.setData(doc.data());
         } else {
@@ -77,7 +98,7 @@ export default {
           // idee feedback no such word
         }
       })
-      .catch(function (error) {
+      .catch(function(error) {
         console.log("Error getting document:", error);
       });
   },
@@ -92,4 +113,10 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.grid-container > div > header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+</style>
