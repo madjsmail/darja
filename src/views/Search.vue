@@ -35,12 +35,8 @@
             name: 'word',
             params: {
               Word: word.Word,
-             /* Origin: word.Origin,
-              definition: word.definition,
-              Synonyms: word.Synonyms,
-              Willaya: word.Willaya,*/
             },
-            query: { myprop: word.Word }
+            query: { word: word.Word },
           }"
           >See More</router-link
         >

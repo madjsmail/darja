@@ -72,7 +72,7 @@ export default {
             Willaya: this.Willaya.toLowerCase(),
           })
           .then(function() {
-            console.log("Document successfully written!");
+
           })
           .catch(function(error) {
             console.error("Error writing document: ", error);
