@@ -10,7 +10,18 @@
         </button>
       </form>
     </header>
-    <contributors/>
+    <div class="spinner" v-if="louading">
+      <div class="lds-roller">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
     <main class="search">
       <div v-if="feedback_search">
         <div class="feedback" v-if="filterWord.length == 0">
@@ -37,7 +48,7 @@
             params: {
               Word: word.Word,
             },
-            query: { word: word.Word.toLowerCase().replace(/ /g,'') },
+            query: { word: word.Word.toLowerCase().replace(/ /g, '') },
           }"
           >See More</router-link
         >
@@ -48,13 +59,10 @@
 
 <script>
 import db from "../firebase/init";
-import contributors from "../components/contributors";
 
 export default {
   name: "Search",
-  components :{
-    contributors
-  },
+  components: {},
   data: function() {
     return {
       feedback_search: false,
@@ -62,11 +70,13 @@ export default {
       feedback: "",
       AllWords: [],
       filterWord: [],
+      louading: null,
     };
   },
   methods: {
     searchedWord() {
       if (this.SEARCH) {
+        this.louading = true;
         var filterword = [];
         this.AllWords.map((element) => {
           if (
@@ -83,6 +93,7 @@ export default {
       } else {
         this.feedback_search = false;
       }
+      this.louading = false;
     },
   },
   mounted() {

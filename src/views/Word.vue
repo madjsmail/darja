@@ -1,5 +1,17 @@
 <template>
-  <div class="container_word">
+  <div class="spinner" v-if="louading">
+    <div class="lds-roller">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  <div v-else class="container_word">
     <header class="word">
       <h2>
         {{ this.Word }}
@@ -81,10 +93,13 @@ export default {
       definition: null,
       Synonyms: null,
       Willaya: null,
+      louading: true,
     };
   },
   mounted() {
     var thias = this;
+    this.louading = true;
+
     db.collection("Words")
       .doc(this.Word.toLowerCase())
       .get()
@@ -108,6 +123,8 @@ export default {
       this.definition = object.definition;
       this.Willaya = object.Willaya;
       this.Synonyms = object.Synonyms;
+      this.louading = false;
+
     },
   },
 };
@@ -119,4 +136,5 @@ export default {
   display: flex;
   justify-content: space-between;
 }
+
 </style>
