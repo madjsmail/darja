@@ -10,6 +10,7 @@
         </button>
       </form>
     </header>
+    <contributors/>
     <main class="search">
       <div v-if="feedback_search">
         <div class="feedback" v-if="filterWord.length == 0">
@@ -36,7 +37,7 @@
             params: {
               Word: word.Word,
             },
-            query: { word: word.Word },
+            query: { word: word.Word.toLowerCase().replace(/ /g,'') },
           }"
           >See More</router-link
         >
@@ -47,9 +48,13 @@
 
 <script>
 import db from "../firebase/init";
+import contributors from "../components/contributors";
 
 export default {
   name: "Search",
+  components :{
+    contributors
+  },
   data: function() {
     return {
       feedback_search: false,

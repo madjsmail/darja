@@ -63,9 +63,9 @@ export default {
     addColection() {
       if (this.Word != "" && (this.Synonyms != "" || this.definition != "")) {
         db.collection("Words")
-          .doc(this.Word)
+          .doc(this.Word.toLowerCase().split(" ").join(""))
           .set({
-            Word: this.Word.toLowerCase(),
+            Word: this.Word.toLowerCase().split(" ").join(""),
             Origin: this.Origin.toLowerCase(),
             Synonyms: this.Synonyms.toLowerCase(),
             definition: this.definition.toLowerCase(),
@@ -140,7 +140,7 @@ sup {
   background-color: #d4edda;
   color: #155724;
   border-radius: 4px;
-  font-size: 1px;
+  font-size: 16px;
   line-height: 24px;
 }
 </style>
