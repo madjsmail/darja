@@ -26,6 +26,42 @@
       <div v-if="feedback_search">
         <div class="feedback" v-if="filterWord.length == 0">
           <p>no results found</p>
+          <h3>
+            Most searched word
+          </h3>
+          <div class="suggestion">
+            <ul>
+              <li>
+                        <router-link
+          v-bind:to="{
+            name: 'word',
+            params: {
+              Word: arwah,
+            },
+            query: { word: 'arwah' },
+          }"
+          >Arwahhhhhh</router-link>
+              </li>
+              <li>
+                gawri
+              </li>
+              <li>
+                ranak
+              </li>
+              <li>
+                ranak
+              </li>
+              <li>
+                ranak
+              </li>
+              <li>
+                ranak
+              </li>
+              <li>
+                ranak
+              </li>
+            </ul>
+          </div>
         </div>
         <div class="feedback" v-if="filterWord.length != 0">
           <p>
@@ -187,6 +223,77 @@ header {
       bottom: 0.4em;
       text-decoration: underline;
     }
+  }
+}
+
+.suggestion {
+  margin: 1em auto;
+  width: 400px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  ul {
+    li {
+      border: 2px solid #c27e10;
+      margin: 0 1em 0.5em 0;
+      width: fit-content;
+      padding-left: 0.5em;
+      padding-right: 0.5em;
+      height: 70px;
+      line-height: 3em;
+      text-align: center;
+      box-sizing: border-box;
+      outline: 0;
+      margin-right: 10px;
+      margin-bottom: 10px;
+      color: #fff;
+      display: inline-block;
+      position: relative;
+      cursor: pointer;
+      text-transform: capitalize;
+      transition: 0.4s all ease-in;
+      border-radius: 0.625rem;
+      letter-spacing: 1.5px;
+      -webkit-animation: slide-in-fwd-bottom 0.4s
+        cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+      animation: slide-in-fwd-bottom 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+        both;
+
+      &:hover {
+        color: #c27e10;
+        background: #fff;
+        border: none;
+      }
+    }
+  }
+@for $i from 1 through 7 {
+  li:nth-child(#{$i}) {
+    animation-delay: $i*0.1s;
+  }
+}
+}
+@-webkit-keyframes slide-in-fwd-bottom {
+  0% {
+    -webkit-transform: translateZ(-1400px) translateY(800px);
+    transform: translateZ(-1400px) translateY(800px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateZ(0) translateY(0);
+    transform: translateZ(0) translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes slide-in-fwd-bottom {
+  0% {
+    -webkit-transform: translateZ(-1400px) translateY(800px);
+    transform: translateZ(-1400px) translateY(800px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateZ(0) translateY(0);
+    transform: translateZ(0) translateY(0);
+    opacity: 1;
   }
 }
 </style>
