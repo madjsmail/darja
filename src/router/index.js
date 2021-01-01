@@ -1,9 +1,12 @@
+/* eslint-disable no-extra-boolean-cast */
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
 import Search from "../views/Search.vue";
 import Form from "../views/Form.vue";
 import Auth from "../views/Auth.vue";
+import Admin from "../views/admin/Admin.vue";
 import NotFound from "../views/404.vue";
+import firebase from 'firebase/app'
 // import word from '../views/word.vue'
 // const currentUser = Firebase.auth().currentUser;
 const routes = [
@@ -17,6 +20,29 @@ const routes = [
     name: "Auth",
     props: true,
     component: Auth,
+    beforeEnter: (to, from, next) => {
+      firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+          // User is signed in.
+          next({ name: 'Form' })
+
+        } else {
+          // No user is signed in.
+          //next({ name: 'Home' })
+          next()
+
+        }
+      });
+    }
+  },
+  {
+    path: "/admin",
+    name: "admin",
+    //props: true,
+    meta: { requiresAuth: true },
+
+    component: Admin,
+
   },
 
   {
@@ -62,9 +88,13 @@ const routes = [
   },
 ];
 
+
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
 });
+
+
+
 
 export default router;

@@ -10,31 +10,36 @@
 import firebase from "firebase/app";
 import db from "../firebase/init";
 import router from "../router";
+
 var provider = new firebase.auth.GoogleAuthProvider();
+provider.setCustomParameters({
+  admin: true,
+});
 //provider.addScope("https://www.googleapis.com/auth/contacts.readonly");
 
 export default {
   methods: {
     login() {
+      const T = this ;
       firebase
         .auth()
         .signInWithPopup(provider)
-        .then(function (result) {
+        .then(function(result) {
           // This gives you a Google Access Token. You can use it to access the Google API.
-          var token = result.credential.accessToken;
+          // var token = result.credential.accessToken;
           // The signed-in user info.
           var user = result.user;
           // ...
-          console.log(token, user);
+          //console.log(user.admin);
 
           var Users = db
             .collection("Users")
             .doc(user.displayName.toLowerCase());
 
           Users.get()
-            .then(function (doc) {
+            .then(function(doc) {
               if (doc.exists) {
-                console.log("Document data:", doc.data());
+                // console.log("Document data:", doc.data());
               } else {
                 // doc.data() will be undefined in this case
                 Users.set({
@@ -45,15 +50,16 @@ export default {
                 });
               }
             })
-            .catch(function (error) {
+            .catch(function(error) {
               console.log("Error getting document:", error);
             });
 
           router.push({
             name: "Form",
           });
+           T.isadmin();
         })
-        .catch(function (error) {
+        .catch(function(error) {
           // Handle Errors here.
           var errorCode = error.code;
           var errorMessage = error.message;
@@ -64,11 +70,40 @@ export default {
           // ...
           console.log(errorCode, errorMessage, email, credential);
         });
+     
+    },
+    isadmin() {
+      firebase
+        .auth()
+        .currentUser.getIdTokenResult()
+        .then((idTokenResult) => {
+          // Confirm the user is an Admin.
+          // eslint-disable-next-line no-extra-boolean-cast
+          if (!!idTokenResult.claims.admin) {
+            // Show admin UI.
+            console.log("admin");
+          } else {
+            // Show regular user UI.
+            console.log("not admin");
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
   created() {
-
-  },
+  //   firebase.auth().onAuthStateChanged(function(user) {
+  //     if (user) {
+  //       // User is signed in.
+  //       router.push({
+  //         name: "Form",
+  //       });
+  //     } else {
+  //       // No user is signed in.
+  //     }
+  //   });
+   },
 };
 </script>
 

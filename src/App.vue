@@ -16,6 +16,12 @@
         <li><router-link to="/">Home</router-link></li>
         <li><router-link to="/Search">search</router-link></li>
         <li><router-link to="/Form">contribute</router-link></li>
+        <li v-if="isAuth">
+          <router-link  :to="name = 'Admin'"> Admin</router-link>
+        </li>
+        <li v-if="isAuth">
+          <router-link @click="logOut" to="">Log Out</router-link>
+        </li>
         <!-- <li><router-link to="/about">About</router-link></li> -->
       </ul>
     </nav>
@@ -24,16 +30,44 @@
 </template>
 
 <script>
+import firebase from "firebase/app";
+import router from "./router";
 export default {
   data() {
     return {
       active: 0,
+      isAuth: false,
     };
   },
   methods: {
-    // toggle(){
-    //   alert('madjid');
-    // }
+    logOut() {
+      firebase
+        .auth()
+        .signOut()
+        .then(
+          function() {},
+          function(error) {
+            // An error happened.
+            console.log(error);
+          }
+        );
+    },
+  },
+  created() {
+    const T = this;
+
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        T.isAuth = true;
+        router.push({
+          name: "Home",
+        });
+      } else {
+        // No user is signed in.
+        T.isAuth = false;
+
+      }
+    });
   },
 };
 </script>

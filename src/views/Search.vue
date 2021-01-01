@@ -32,15 +32,16 @@
           <div class="suggestion">
             <ul>
               <li>
-                        <router-link
-          v-bind:to="{
-            name: 'word',
-            params: {
-              Word: arwah,
-            },
-            query: { word: 'arwah' },
-          }"
-          >Arwahhhhhh</router-link>
+                <router-link
+                  v-bind:to="{
+                    name: 'word',
+                    params: {
+                      Word: 'arwah',
+                    },
+                    query: { word: 'arwah' },
+                  }"
+                  >Arwahhhhhh</router-link
+                >
               </li>
               <li>
                 gawri
@@ -266,11 +267,11 @@ header {
       }
     }
   }
-@for $i from 1 through 7 {
-  li:nth-child(#{$i}) {
-    animation-delay: $i*0.1s;
+  @for $i from 1 through 7 {
+    li:nth-child(#{$i}) {
+      animation-delay: $i * 0.1s;
+    }
   }
-}
 }
 @-webkit-keyframes slide-in-fwd-bottom {
   0% {
