@@ -91,7 +91,7 @@
     </button>
     <button
       @submit.prevent
-      v-on:click="addColection"
+      v-on:click="approve"
       id=""
       class=" btn approve"
       type="submit"
@@ -158,6 +158,23 @@ export default {
       this.Willaya = object.Willaya;
       this.Synonyms = object.Synonyms;
       this.louading = false;
+    },
+    approve() {
+      alert(this.Word.toLowerCase())
+      var Word = db.collection("Words").doc(this.Word.toLowerCase());
+
+      // Set the "capital" field of the city 'DC'
+      return Word
+        .update({
+          statu: 'approved',
+        })
+        .then(function() {
+          console.log("Document successfully updated!");
+        })
+        .catch(function(error) {
+          // The document probably doesn't exist.
+          console.error("Error updating document: ", error);
+        });
     },
 
     isAdmin() {
