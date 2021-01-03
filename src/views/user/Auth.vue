@@ -1,15 +1,15 @@
 <template>
   <div class="login">
     <button @click="login" class="btn">
-      <img src="../assets/search.png" alt="" /> <span>log in</span>
+      <img src="../../assets/search.png" alt="" /> <span>log in</span>
     </button>
   </div>
 </template>
 
 <script>
 import firebase from "firebase/app";
-import db from "../firebase/init";
-import router from "../router";
+import db from "../../firebase/init";
+import router from "../../router";
 var provider = new firebase.auth.GoogleAuthProvider();
 //provider.addScope("https://www.googleapis.com/auth/contacts.readonly");
 
@@ -19,7 +19,7 @@ export default {
       firebase
         .auth()
         .signInWithPopup(provider)
-        .then(function (result) {
+        .then(function(result) {
           // This gives you a Google Access Token. You can use it to access the Google API.
           var token = result.credential.accessToken;
           // The signed-in user info.
@@ -32,7 +32,7 @@ export default {
             .doc(user.displayName.toLowerCase());
 
           Users.get()
-            .then(function (doc) {
+            .then(function(doc) {
               if (doc.exists) {
                 console.log("Document data:", doc.data());
               } else {
@@ -45,7 +45,7 @@ export default {
                 });
               }
             })
-            .catch(function (error) {
+            .catch(function(error) {
               console.log("Error getting document:", error);
             });
 
@@ -53,7 +53,7 @@ export default {
             name: "Form",
           });
         })
-        .catch(function (error) {
+        .catch(function(error) {
           // Handle Errors here.
           var errorCode = error.code;
           var errorMessage = error.message;

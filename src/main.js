@@ -7,15 +7,5 @@ import firebase from "firebase/app";
 import 'firebase/firestore';
 import 'firebase/auth'
 
-router.beforeEach((to, from, next) => {
-    const currentUser = firebase.auth().currentUser;
-    const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
-    if (requiresAuth && !currentUser) {
-     next('/Auth');
-    } else if (requiresAuth && currentUser) {
-     next();
-    } else {
-     next();
-    }
-    });
+
 createApp(App).use(router).mount('#app')

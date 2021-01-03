@@ -16,6 +16,7 @@
         <li><router-link to="/">Home</router-link></li>
         <li><router-link to="/Search">search</router-link></li>
         <li><router-link to="/Form">contribute</router-link></li>
+        <li @click="logOut"><router-link to="/">log out</router-link></li>
         <!-- <li><router-link to="/about">About</router-link></li> -->
       </ul>
     </nav>
@@ -24,6 +25,7 @@
 </template>
 
 <script>
+import firebase from 'firebase/app'
 export default {
   data() {
     return {
@@ -31,9 +33,16 @@ export default {
     };
   },
   methods: {
-    // toggle(){
-    //   alert('madjid');
-    // }
+logOut(){
+  firebase.auth().signOut()
+  .then(function() {
+    // Sign-out successful.
+  })
+  .catch(function(error) {
+    // An error happened
+    console.log(error);
+  });
+}
   },
 };
 </script>

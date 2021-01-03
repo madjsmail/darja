@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="search_page">
     <header>
       <form @submit.prevent class="form-input">
         <label> seach your word</label>
@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import db from "../firebase/init";
+import db from "../../firebase/init";
 
 export default {
   name: "Search",
@@ -99,6 +99,7 @@ export default {
   mounted() {
     var Words = [];
     db.collection("Words")
+      .where("statu", "==", "Approved")
       .get()
       .then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
@@ -147,46 +148,5 @@ header {
   }
 }
 
-.search {
-  width: 100vw;
-  display: flex;
-  flex-direction: column;
-  //justify-content: space-between;
-  .feedback {
-    //margin: 1em auto;
-    font-size: 22px;
-    text-align: center;
-  }
 
-  .card {
-    font-weight: 500;
-    margin: 1em auto;
-    position: relative;
-    // background-color: #7c052d;
-    background-color: #181818;
-    color: #ffffff;
-    padding: 0.5em 1em;
-    height: 200px;
-    overflow: hidden;
-    width: 70vw;
-    border-radius: 5px;
-    transition: 0.4s;
-    box-shadow: 3px 3px 5px 2px #292929a8;
-
-    &:hover {
-      transform: scale(1.1, 1.1);
-    }
-
-    .card_content {
-      width: 80%;
-    }
-
-    a {
-      color: rgb(117, 117, 117);
-      position: absolute;
-      bottom: 0.4em;
-      text-decoration: underline;
-    }
-  }
-}
 </style>

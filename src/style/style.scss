@@ -199,7 +199,7 @@ header {
 }
 
 .container_word {
-  width: 98vw;
+  width: 99vw;
   margin-left: 2em;
 
 
@@ -265,6 +265,8 @@ header {
 
 
   }
+
+  
 
 }
 #button {
@@ -521,4 +523,62 @@ header {
   100% {
     transform: scale(1);
   }
+}
+
+.search {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  //justify-content: space-between;
+  .feedback {
+    //margin: 1em auto;
+    font-size: 22px;
+    text-align: center;
+  }
+
+  .card {
+    font-weight: 500;
+    margin: 1em auto;
+    position: relative;
+    // background-color: #7c052d;
+    background-color: #181818;
+    color: #ffffff;
+    padding: 0.5em 1em;
+    height: 200px;
+    overflow: hidden;
+    width: 70vw;
+    border-radius: 5px;
+    transition: 0.4s;
+    box-shadow: 3px 3px 5px 2px #292929a8;
+
+    &:hover {
+      transform: scale(1.1, 1.1);
+    }
+
+    .card_content {
+      width: 80%;
+    }
+
+    a {
+      color: rgb(117, 117, 117);
+      position: absolute;
+      bottom: 0.4em;
+      text-decoration: underline;
+    }
+  }
+}
+
+.success_msg {
+  width: 60vw;
+  height: 60px;
+  margin: 2em auto;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-content: center;
+  background-color: #d4edda;
+  color: #155724;
+  border-radius: 4px;
+  font-size: 16px;
+  line-height: 24px;
 }

@@ -81,8 +81,8 @@
 </template>
 
 <script>
-import db from "../firebase/init";
-import router from "../router";
+import db from "@/firebase/init";
+import router from "@/router";
 export default {
   name: "word",
   props: {},
