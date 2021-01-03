@@ -100,7 +100,7 @@
     </button>
     <button
       @submit.prevent
-      v-on:click="addColection"
+      v-on:click="deleteWord"
       id=""
       class="btn delete"
       type="submit"
@@ -160,20 +160,29 @@ export default {
       this.louading = false;
     },
     approve() {
-      alert(this.Word.toLowerCase())
       var Word = db.collection("Words").doc(this.Word.toLowerCase());
 
       // Set the "capital" field of the city 'DC'
-      return Word
-        .update({
-          statu: 'approved',
-        })
+      return Word.update({
+        statu: "approved",
+      })
         .then(function() {
           console.log("Document successfully updated!");
         })
         .catch(function(error) {
           // The document probably doesn't exist.
           console.error("Error updating document: ", error);
+        });
+    },
+    deleteWord() {
+      db.collection("Words")
+        .doc(this.Word.toLowerCase())
+        .delete()
+        .then(function() {
+          console.log("Document successfully deleted!");
+        })
+        .catch(function(error) {
+          console.error("Error removing document: ", error);
         });
     },
 
