@@ -78,9 +78,40 @@
       </div> -->
     </section>
   </div>
+
+  <div v-if="Admin" class="footer">
+    <button
+      @submit.prevent
+      v-on:click="addColection"
+      id=""
+      class="btn edite"
+      type="submit"
+    >
+      edite
+    </button>
+    <button
+      @submit.prevent
+      v-on:click="addColection"
+      id=""
+      class=" btn approve"
+      type="submit"
+    >
+      approve
+    </button>
+    <button
+      @submit.prevent
+      v-on:click="addColection"
+      id=""
+      class="btn delete"
+      type="submit"
+    >
+      delete
+    </button>
+  </div>
 </template>
 
 <script>
+import firebase from "firebase/app";
 import db from "../firebase/init";
 import router from "../router";
 export default {
@@ -94,6 +125,7 @@ export default {
       Synonyms: null,
       Willaya: null,
       louading: true,
+      Admin: false,
     };
   },
   mounted() {
@@ -116,6 +148,8 @@ export default {
       .catch(function(error) {
         console.log("Error getting document:", error);
       });
+
+    this.isAdmin();
   },
   methods: {
     setData(object) {
@@ -124,17 +158,82 @@ export default {
       this.Willaya = object.Willaya;
       this.Synonyms = object.Synonyms;
       this.louading = false;
+    },
 
+    isAdmin() {
+      const T = this;
+
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          firebase
+            .auth()
+            .currentUser.getIdTokenResult()
+            .then((idTokenResult) => {
+              // Confirm the user is an Admin.
+              // eslint-disable-next-line no-extra-boolean-cast
+              if (!!idTokenResult.claims.admin) {
+                // Show admin UI.
+                T.Admin = true;
+              } else {
+                // Show regular user UI.
+                T.Admin = false;
+              }
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        } else {
+          // No user is signed in.
+          T.Admin = false;
+        }
+      });
     },
   },
 };
 </script>
 
-<style>
+<style lang="scss">
 .grid-container > div > header {
   width: 100%;
   display: flex;
   justify-content: space-between;
 }
 
+.footer {
+  width: 60%;
+  margin: 1em auto;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  .btn {
+    position: relative;
+  }
+  .edite {
+    color: #f9f871 !important;
+    background-color: transparent !important;
+    outline: 1px solid #f9f871;
+    &:hover {
+      border: 1px solid #f9f871;
+      box-shadow: inset 0 0 20px #f9f871;
+    }
+  }
+  .delete {
+    color: #ff0055 !important;
+    background-color: transparent !important;
+    outline: 1px solid #ff0055;
+    &:hover {
+      border: 1px solid #ff0055;
+      box-shadow: inset 0 0 20px #ff0055;
+    }
+  }
+  .approve {
+    color: #00c896 !important;
+    background-color: transparent !important;
+    outline: 1px solid #00c896;
+    &:hover {
+      border: 1px solid #00c896;
+      box-shadow: inset 0 0 20px #00c896;
+    }
+  }
+}
 </style>

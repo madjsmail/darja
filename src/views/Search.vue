@@ -136,6 +136,8 @@ export default {
   mounted() {
     var Words = [];
     db.collection("Words")
+      .where("statu", "==", "approved")
+
       .get()
       .then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {

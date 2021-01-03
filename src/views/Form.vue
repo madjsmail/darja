@@ -70,6 +70,7 @@ export default {
             Synonyms: this.Synonyms.toLowerCase(),
             definition: this.definition.toLowerCase(),
             Willaya: this.Willaya.toLowerCase(),
+            statu : 'waiting'
           })
           .then(function() {
 

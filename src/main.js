@@ -10,7 +10,7 @@ import 'firebase/auth'
 router.beforeEach((to, from, next) => {
     const currentUser = firebase.auth().currentUser;
     const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
-    if (requiresAuth && !currentUser) {
+    if (to.name=='Form' && requiresAuth && !currentUser) {
         next('/Auth');
     } else if (requiresAuth && currentUser) {
         next();
