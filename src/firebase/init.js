@@ -1,6 +1,8 @@
 import firebase from "firebase/app";
 import 'firebase/firestore';
 import 'firebase/auth'
+
+
 const firebaseConfig = {
     // apiKey: process.env.VUE_APP_FIREBASE_apiKey, 
     // authDomain: process.env.VUE_APP_FIREBASE_authDomain,

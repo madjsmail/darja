@@ -61,6 +61,9 @@ export default {
   },
   methods: {
     addColection() {
+      
+
+
       if (this.Word != "" && (this.Synonyms != "" || this.definition != "")) {
         db.collection("Words")
           .doc(this.Word.toLowerCase().split(" ").join(""))

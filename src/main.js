@@ -7,5 +7,57 @@ import firebase from "firebase/app";
 import 'firebase/firestore';
 import 'firebase/auth'
 
+router.beforeEach((to, from, next) => {
+    const currentUser = firebase.auth().currentUser;
+    const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+    if (to.name == 'Form' && requiresAuth && !currentUser) {
+        next('/Auth');
+    } else if (requiresAuth && currentUser) {
+        next();
+    } else {
+        next();
+    }
+});
+
+router.beforeEach((to, from, next) => {
+    const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+    const currentUser = firebase.auth().currentUser;
+    var isAdmin = false;
+    firebase
+        .auth()
+        .currentUser.getIdTokenResult()
+        .then((idTokenResult) => {
+            // Confirm the user is an Admin.
+            // eslint-disable-next-line no-extra-boolean-cast
+            if (!!idTokenResult.claims.admin) {
+                isAdmin = true
+
+            } else {
+                isAdmin = false
+
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+
+    if (to.name == 'Admin' && requiresAuth && !currentUser && !isAdmin) {
+        next('/Auth');
+    } else if (requiresAuth && currentUser && isAdmin) {
+        next('Admin');
+    } else {
+        next();
+    }
+
+
+
+})
+
+
+
+
+
+
+
 
 createApp(App).use(router).mount('#app')

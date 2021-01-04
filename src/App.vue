@@ -30,6 +30,7 @@ export default {
   data() {
     return {
       active: 0,
+      isAuth: false,
     };
   },
   methods: {
