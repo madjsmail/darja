@@ -16,6 +16,9 @@
         <li><router-link to="/">Home</router-link></li>
         <li><router-link to="/Search">search</router-link></li>
         <li><router-link to="/Form">contribute</router-link></li>
+        <li v-if="Admin">
+          <router-link to="/dashboard">dashboard</router-link>
+        </li>
         <li @click="logOut"><router-link to="/">log out</router-link></li>
         <!-- <li><router-link to="/about">About</router-link></li> -->
       </ul>
@@ -25,25 +28,59 @@
 </template>
 
 <script>
-import firebase from 'firebase/app'
+import firebase from "firebase/app";
 export default {
   data() {
     return {
       active: 0,
       isAuth: false,
+      Admin: null,
     };
   },
   methods: {
-logOut(){
-  firebase.auth().signOut()
-  .then(function() {
-    // Sign-out successful.
-  })
-  .catch(function(error) {
-    // An error happened
-    console.log(error);
-  });
-}
+    logOut() {
+      firebase
+        .auth()
+        .signOut()
+        .then(function() {
+          // Sign-out successful.
+        })
+        .catch(function(error) {
+          // An error happened
+          console.log(error);
+        });
+    },
+  },
+  created() {
+    //var admin = false;
+    const T =this ;
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        // User is signed in.
+        firebase
+          .auth()
+          .currentUser.getIdTokenResult()
+          .then((idTokenResult) => {
+            // Confirm the user is an Admin.
+            // eslint-disable-next-line no-extra-boolean-cast
+            if (!!idTokenResult.claims.admin) {
+              // Show admin UI.
+              T.Admin = true;
+            } else {
+              // Show regular user UI.
+              T.Admin = false;
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else {
+        // No user is signed in.
+        T.Admin = false;
+      }
+    });
+
+    //this.Admin = admin;
   },
 };
 </script>

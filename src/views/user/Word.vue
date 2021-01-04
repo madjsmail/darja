@@ -11,7 +11,12 @@
       <div></div>
     </div>
   </div>
-  <div v-else class="container_word">
+  <div class="success_msg" v-if="feedback">
+    <p>
+      {{ this.feedback }}
+    </p>
+  </div>
+  <div v-if="!louading" class="container_word">
     <header class="word">
       <h2>
         {{ this.Word }}
@@ -77,36 +82,26 @@
         <p v-else>no Synonyms available</p>
       </div> -->
     </section>
-  </div>
-
-  <div v-if="Admin" class="footer">
-    <button
-      @submit.prevent
-      v-on:click="addColection"
-      id=""
-      class="btn edite"
-      type="submit"
-    >
-      edite
-    </button>
-    <button
-      @submit.prevent
-      v-on:click="approve"
-      id=""
-      class=" btn approve"
-      type="submit"
-    >
-      approve
-    </button>
-    <button
-      @submit.prevent
-      v-on:click="deleteWord"
-      id=""
-      class="btn delete"
-      type="submit"
-    >
-      delete
-    </button>
+    <div v-if="Admin" class="footer">
+      <div class="footer">
+        <router-link
+          v-bind:to="{
+            name: '_form',
+            params: {
+              Word: this.Word,
+            },
+            query: { word: this.Word.toLowerCase().replace(/ /g, '') },
+          }"
+          class="btn edite"
+          type="submit"
+        >
+          edite
+        </router-link>
+        <button v-on:click="deleteWord" id="" class="btn delete" type="submit">
+          delete
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -126,6 +121,7 @@ export default {
       Willaya: null,
       louading: true,
       Admin: false,
+      feedback: null,
     };
   },
   mounted() {
@@ -157,35 +153,23 @@ export default {
       this.definition = object.definition;
       this.Willaya = object.Willaya;
       this.Synonyms = object.Synonyms;
+      this.statu = object.statu;
       this.louading = false;
     },
-    approve() {
-      var Word = db.collection("Words").doc(this.Word.toLowerCase());
 
-      // Set the "capital" field of the city 'DC'
-      return Word.update({
-        statu: "approved",
-      })
-        .then(function() {
-          console.log("Document successfully updated!");
-        })
-        .catch(function(error) {
-          // The document probably doesn't exist.
-          console.error("Error updating document: ", error);
-        });
-    },
     deleteWord() {
+      const T = this;
       db.collection("Words")
         .doc(this.Word.toLowerCase())
         .delete()
         .then(function() {
           console.log("Document successfully deleted!");
+          T.feedback = "Document successfully deleted!";
         })
         .catch(function(error) {
           console.error("Error removing document: ", error);
         });
     },
-
     isAdmin() {
       const T = this;
 
@@ -223,43 +207,5 @@ export default {
   width: 100%;
   display: flex;
   justify-content: space-between;
-}
-
-.footer {
-  width: 60%;
-  margin: 1em auto;
-  display: flex;
-  justify-content: space-between;
-  position: relative;
-  .btn {
-    position: relative;
-  }
-  .edite {
-    color: #f9f871 !important;
-    background-color: transparent !important;
-    outline: 1px solid #f9f871;
-    &:hover {
-      border: 1px solid #f9f871;
-      box-shadow: inset 0 0 20px #f9f871;
-    }
-  }
-  .delete {
-    color: #ff0055 !important;
-    background-color: transparent !important;
-    outline: 1px solid #ff0055;
-    &:hover {
-      border: 1px solid #ff0055;
-      box-shadow: inset 0 0 20px #ff0055;
-    }
-  }
-  .approve {
-    color: #00c896 !important;
-    background-color: transparent !important;
-    outline: 1px solid #00c896;
-    &:hover {
-      border: 1px solid #00c896;
-      box-shadow: inset 0 0 20px #00c896;
-    }
-  }
 }
 </style>

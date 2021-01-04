@@ -11,11 +11,6 @@
       <div></div>
     </div>
   </div>
-    <div class="success_msg" v-if="feedback">
-    <p>
-      {{ this.feedback }}
-    </p>
-  </div>
   <div v-if="!louading" class="container_word">
     <header class="word">
       <h2>
@@ -83,12 +78,22 @@
       </div> -->
     </section>
     <div class="footer">
-      <button @click="approveWord" class="btn approve">
+      <button v-if="!statu" @click="approveWord" class="btn approve">
         approve
       </button>
-      <button class="btn edite">
+      <router-link
+        v-bind:to="{
+          name: '_form',
+          params: {
+            Word: this.Word,
+          },
+          query: { word: this.Word.toLowerCase().replace(/ /g, '') },
+        }"
+        class="btn edite"
+        type="submit"
+      >
         edite
-      </button>
+      </router-link>
       <button @click="deleteWord" class="btn delete">
         delete
       </button>
@@ -110,11 +115,11 @@ export default {
       Synonyms: null,
       Willaya: null,
       louading: true,
-      feedback : ''
+      feedback: "",
     };
   },
   mounted() {
-      this.feedback = '' ;
+    this.feedback = "";
     var thias = this;
     this.louading = true;
 
@@ -123,7 +128,11 @@ export default {
       .get()
       .then(function(doc) {
         if (doc.exists) {
-          thias.setData(doc.data());
+          if (doc.data().statu == "waiting") {
+            thias.setData(doc.data());
+          } else {
+            thias.feedback = "ata not found";
+          }
         } else {
           router.push({
             name: "NotFound",
@@ -141,33 +150,32 @@ export default {
       this.definition = object.definition;
       this.Willaya = object.Willaya;
       this.Synonyms = object.Synonyms;
+      this.statu = object.statu == "Approved" ? true : false;
       this.louading = false;
     },
     deleteWord() {
-        const T = this
+      const T = this;
       db.collection("Words")
         .doc(this.Word.toLowerCase())
         .delete()
         .then(function() {
-            T.feedback = 'Document successfully deleted!'
-         
+          T.feedback = "Document successfully deleted!";
         })
         .catch(function(error) {
           console.error("Error removing document: ", error);
         });
     },
     approveWord() {
-        const T = this
+      const T = this;
 
       db.collection("Words")
         .doc(this.Word.toLowerCase())
         .update({
-            statu : 'Approved'
+          statu: "Approved",
         })
         .then(function() {
-            T.feedback = 'Document successfully updated!'
-
-});
+          T.feedback = "Document successfully updated!";
+        });
     },
   },
 };
@@ -178,81 +186,5 @@ export default {
   width: 100%;
   display: flex;
   justify-content: space-between;
-}
-.footer {
-  width: 100%;
-  display: flex;
-  position: relative;
-  justify-content: space-between;
-
-  .btn {
-    position: relative;
-  }
-  .approve {
-    color: #00c896;
-    max-width: 160px;
-    background-color: transparent;
-    width: 100%;
-    border: 0 solid #00c896;
-    box-shadow: inset 0 0 20px #00c896;
-    outline: 1px solid;
-    outline-color: #00c896;
-    outline-offset: 0px;
-    text-shadow: none;
-    transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
-
-    &:hover {
-      border: 1px solid #00c896;
-      box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5),
-        0 0 20px rgba(255, 255, 255, 0.2);
-      outline-color: rgba(255, 255, 255, 0);
-      outline-offset: 10px;
-      text-shadow: 1px 1px 2px #00c896;
-    }
-  }
-  .edite {
-    color: #f9f871;
-    max-width: 160px;
-    background-color: transparent;
-    width: 100%;
-    border: 0 solid #f9f871;
-    box-shadow: inset 0 0 20px #f9f871;
-    outline: 1px solid;
-    outline-color: #f9f871;
-    outline-offset: 0px;
-    text-shadow: none;
-    transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
-
-    &:hover {
-      border: 1px solid #f9f871;
-      box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5),
-        0 0 20px rgba(255, 255, 255, 0.2);
-      outline-color: rgba(255, 255, 255, 0);
-      outline-offset: 10px;
-      text-shadow: 1px 1px 2px #f9f871;
-    }
-  }
-  .delete {
-    color: #d47e6c;
-    max-width: 160px;
-    background-color: transparent;
-    width: 100%;
-    border: 0 solid #d47e6c;
-    box-shadow: inset 0 0 20px #d47e6c;
-    outline: 1px solid;
-    outline-color: #d47e6c;
-    outline-offset: 0px;
-    text-shadow: none;
-    transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
-
-    &:hover {
-      border: 1px solid #d47e6c;
-      box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5),
-        0 0 20px rgba(255, 255, 255, 0.2);
-      outline-color: rgba(255, 255, 255, 0);
-      outline-offset: 10px;
-      text-shadow: 1px 1px 2px #d47e6c;
-    }
-  }
 }
 </style>

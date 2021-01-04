@@ -20,7 +20,7 @@ provider.setCustomParameters({
 export default {
   methods: {
     login() {
-      const T = this ;
+     // const T = this ;
       firebase
         .auth()
         .signInWithPopup(provider)
@@ -57,7 +57,7 @@ export default {
           router.push({
             name: "Form",
           });
-           T.isadmin();
+          
         })
         .catch(function(error) {
           // Handle Errors here.
@@ -72,25 +72,25 @@ export default {
         });
      
     },
-    isadmin() {
-      firebase
-        .auth()
-        .currentUser.getIdTokenResult()
-        .then((idTokenResult) => {
-          // Confirm the user is an Admin.
-          // eslint-disable-next-line no-extra-boolean-cast
-          if (!!idTokenResult.claims.admin) {
-            // Show admin UI.
-            console.log("admin");
-          } else {
-            // Show regular user UI.
-            console.log("not admin");
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
+    // isadmin() {
+    //   firebase
+    //     .auth()
+    //     .currentUser.getIdTokenResult()
+    //     .then((idTokenResult) => {
+    //       // Confirm the user is an Admin.
+    //       // eslint-disable-next-line no-extra-boolean-cast
+    //       if (!!idTokenResult.claims.admin) {
+    //         // Show admin UI.
+    //         console.log("admin");
+    //       } else {
+    //         // Show regular user UI.
+    //         console.log("not admin");
+    //       }
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //     });
+    // },
   },
   created() {
   //   firebase.auth().onAuthStateChanged(function(user) {
