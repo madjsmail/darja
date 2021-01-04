@@ -46,42 +46,6 @@ const routes = [
       });
     }
   },
-  {
-    path: "/Admin",
-    name: "Admin",
-    //props: true,
-    meta: { requiresAuth: true },
-
-    component: Admin,
-    // beforeEnter: (to, from, next) => {
-    //   firebase.auth().onAuthStateChanged(function (user) {
-    //     if (user) {
-    //       firebase
-    //         .auth()
-    //         .currentUser.getIdTokenResult()
-    //         .then((idTokenResult) => {
-    //           // Confirm the user is an Admin.
-    //           // eslint-disable-next-line no-extra-boolean-cast
-    //           if (!!idTokenResult.claims.admin) {
-    //             // Show admin UI.
-    //             next()
-    //           } else {
-    //             // Show regular user UI.
-    //             next({ path: '/' })
-    //           }
-    //         })
-    //         .catch((error) => {
-    //           console.log(error);
-    //         });
-    //     } else {
-    //       next({ path: '/' })
-
-
-    //     }
-    //   });
-    // }
-
-  },
 
   {
     path: "/dashboard",

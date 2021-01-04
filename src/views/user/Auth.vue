@@ -8,8 +8,8 @@
 
 <script>
 import firebase from "firebase/app";
-import db from "../firebase/init";
-import router from "../router";
+import db from "../../firebase/init";
+import router from "../../router";
 
 var provider = new firebase.auth.GoogleAuthProvider();
 provider.setCustomParameters({
