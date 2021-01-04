@@ -42,16 +42,16 @@
           >
           </textarea>
         </div>
-        <div class="foter">
-          <button
-            @submit.prevent
-            v-on:click="updateColection"
-            id="button"
-            type="submit"
-          >
-            UPDATE
-          </button>
-        </div>
+      </div>
+      <div class="foter">
+        <button
+          @submit.prevent
+          v-on:click="updateColection"
+          id="button"
+          type="submit"
+        >
+          UPDATE
+        </button>
       </div>
     </div>
   </div>
