@@ -128,7 +128,7 @@ nav {
     align-content: center;
     transition: transform 0.4s ease-in;
     color: rgba(255, 255, 255, 0);
-    transform: translateX(600px);
+    transform: translateX(900px);
     &.active {
       transform: translateX(0);
     }
@@ -140,7 +140,7 @@ nav {
     }
   }
 }
-@media (min-width: 900px) {
+@media (min-width: 950px) {
   nav {
     display: flex;
     justify-content: space-between;

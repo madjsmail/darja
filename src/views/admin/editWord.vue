@@ -77,27 +77,7 @@
         <p v-else>no Synonyms available</p>
       </div> -->
     </section>
-    <div class="footer">
-      <button v-if="!statu" @click="approveWord" class="btn approve">
-        approve
-      </button>
-      <router-link
-        v-bind:to="{
-          name: '_form',
-          params: {
-            Word: this.Word,
-          },
-          query: { word: this.Word.toLowerCase().replace(/ /g, '') },
-        }"
-        class="btn edite"
-        type="submit"
-      >
-        edite
-      </router-link>
-      <button @click="deleteWord" class="btn delete">
-        delete
-      </button>
-    </div>
+
   </div>
 </template>
 

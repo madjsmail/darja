@@ -208,17 +208,31 @@ header {
   div {
     max-width: 80vw;
   }
+  header{
+    display: block;
+  }
 
   .word {
     font-size: 2em;
     font-weight: 600;
 
     h2 {
-      color: #00AAA9;
+      color: #777777;
       text-transform: capitalize;
+      margin: 0;
+      margin-top: 1em;
+    }
+    span{
+      font-size: 15px;
+      text-transform:uppercase ;
     }
   }
-
+  .arabic{
+    text-align: right;
+  }
+  .latin{
+    text-align: right;
+  }
   strong {
     font-size: 1.5em;
     text-transform: capitalize;
@@ -423,6 +437,11 @@ header {
     font-size: 16px;
   }
 }
+@media (min-width: 930px) {
+  body {
+    font-size: 18px;
+  }
+}
 
 @media (min-width: 900px) {
   body {
@@ -462,7 +481,7 @@ header {
   }
 
   .container_word {
-    width: 90vw;
+    width: 85vw;
     margin: 1em auto;
   }
 
@@ -470,6 +489,7 @@ header {
 
 
   .grid-container {
+    margin-top: 1em;
     display: grid;
 
     grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
@@ -550,6 +570,11 @@ header {
       margin-left: 1.7em;
 
     }
+  }
+  .footer{
+    width: 50% !important;
+    margin: 0.8em auto;
+    justify-content: space-around;
   }
 
 }

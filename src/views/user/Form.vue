@@ -50,6 +50,7 @@ export default {
     return {
       user: firebase.auth().currentUser.displayName.toLowerCase(),
       photoUrl: firebase.auth().currentUser.photoURL,
+      isAdmin: false,
       Word: "",
       success: "",
       Origin: "",
@@ -61,23 +62,27 @@ export default {
   },
   methods: {
     addColection() {
-      
-
+      var statu = this.isAdmin ? "waiting" : "Approved";
 
       if (this.Word != "" && (this.Synonyms != "" || this.definition != "")) {
         db.collection("Words")
-          .doc(this.Word.toLowerCase().split(" ").join(""))
+          .doc(
+            this.Word.toLowerCase()
+              .split(" ")
+              .join("")
+          )
           .set({
-            Word: this.Word.toLowerCase().split(" ").join(""),
+            Word: this.Word.toLowerCase()
+              .split(" ")
+              .join(""),
             Origin: this.Origin.toLowerCase(),
             Synonyms: this.Synonyms.toLowerCase(),
             definition: this.definition.toLowerCase(),
             Willaya: this.Willaya.toLowerCase(),
-            statu : 'waiting'
+            user: this.user,
+            statu: statu,
           })
-          .then(function() {
-
-          })
+          .then(function() {})
           .catch(function(error) {
             console.error("Error writing document: ", error);
           });
@@ -104,6 +109,34 @@ export default {
       } else {
         this.feedback = " ⛔ you need to fille the inputs ";
       }
+    },
+    mounted() {
+      const T = this;
+
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          firebase
+            .auth()
+            .currentUser.getIdTokenResult()
+            .then((idTokenResult) => {
+              // Confirm the user is an Admin.
+              // eslint-disable-next-line no-extra-boolean-cast
+              if (!!idTokenResult.claims.admin) {
+                // Show admin UI.
+                T.isAdmin = true;
+              } else {
+                // Show regular user UI.
+                T.isAdmin = false;
+              }
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        } else {
+          // No user is signed in.
+          T.isAdmin = false;
+        }
+      });
     },
   },
 };
