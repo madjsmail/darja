@@ -12,18 +12,20 @@
         :class="active ? 'menu-btn menu-btn--active' : 'menu-btn'"
         @click="active = !active"
       ></a>
-      <ul :class="active ? 'active' : ''">
-        <li><router-link to="/">Home</router-link></li>
-        <li><router-link to="/Search">search</router-link></li>
-        <li><router-link to="/Form">contribute</router-link></li>
-        <li v-if="Admin">
-          <router-link to="/dashboard">dashboard</router-link>
-        </li>
-        <li @click="logOut"><router-link to="/">log out</router-link></li>
-        <!-- <li><router-link to="/about">About</router-link></li> -->
-      </ul>
     </nav>
   </div>
+
+  <ul :class="active ? 'active' : ''">
+    <li><router-link to="/">Home</router-link></li>
+    <li><router-link to="/Search">search</router-link></li>
+    <li><router-link to="/Form">contribute</router-link></li>
+    <li v-if="Admin">
+      <router-link to="/dashboard">dashboard</router-link>
+    </li>
+    <li @click="logOut"><router-link to="/">log out</router-link></li>
+    <!-- <li><router-link to="/about">About</router-link></li> -->
+  </ul>
+
   <router-view />
 </template>
 
@@ -53,7 +55,7 @@ export default {
   },
   created() {
     //var admin = false;
-    const T =this ;
+    const T = this;
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.
@@ -113,31 +115,37 @@ nav {
     font-size: 2em;
     font-family: "Comfortaa", cursive;
   }
+}
+ul {
+  z-index: 2;
+  position: absolute;
+  right: 0;
+  top: -1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  height: 100%;
+  width: 200px;
+  background-color: rgb(32, 32, 32);
+  list-style: none;
+  transition: transform 0.4s ease-in;
+  color: rgb(255, 255, 255);
+  transform: translateX(700px);
+  // flex-wrap: wrap;
 
-  ul {
-    list-style: none;
+  li {
     display: flex;
-    flex-direction: row;
-    position: absolute;
-    right: 0;
-    top: 3em;
-    //background-color: rgb(14, 14, 14);
-    justify-content: center;
-    align-items: center;
-    align-self: center;
-    align-content: center;
-    transition: transform 0.4s ease-in;
-    color: rgba(255, 255, 255, 0);
-    transform: translateX(900px);
-    &.active {
-      transform: translateX(0);
+    height: 50px;
+    a {
+      font-size: 20px;
+      text-transform: uppercase;
     }
+  }
 
-    li {
-      display: flex;
-
-      margin: 0 2em 0 auto;
-    }
+  &.active {
+    transform: translateX(0);
   }
 }
 @media (min-width: 950px) {
@@ -159,18 +167,40 @@ nav {
       display: flex;
       align-items: flex-end;
     }
+  }
 
-    ul {
-      list-style: none;
+  ul {
+    position: absolute;
+    right: 0;
+    top: 4em;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    height: 80px;
+    width: 600px;
+    background-color: transparent;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    list-style: none;
+    transition: transform 0.4s ease-in;
+    color: rgb(255, 255, 255);
+    transform: translateX(0);
+    // flex-wrap: wrap;
+
+    li {
       display: flex;
-      flex-direction: row;
-      transform: translateX(0px);
-
-      li {
-        display: flex;
-
-        margin: 0 2em 0 auto;
+      height: 50px;
+      margin-left: .9em;
+      a {
+        font-size: 20px;
       }
+    }
+
+    &.active {
+      transform: translateX(0);
     }
   }
   .menu-btn {
@@ -179,6 +209,7 @@ nav {
 }
 
 .menu-btn {
+  z-index: 10000;
   display: block;
   right: 1em;
   bottom: 1em;

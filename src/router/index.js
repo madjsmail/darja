@@ -5,7 +5,6 @@ import Search from "@/views/user/Search.vue";
 import Form from "@/views/user/Form.vue";
 import Auth from "@/views/user/Auth.vue";
 import NotFound from "@/views/user/404.vue";
-import editWord from "@/views/admin/editWord.vue";
 import _form from "@/views/admin/_form.vue";
 import firebase from 'firebase/app'
 
@@ -23,14 +22,6 @@ const routes = [
     name: "Auth",
     props: true,
     component: Auth,
-
-
-  },
-  {
-    path: "/editWord",
-    name: "editWord",
-    props: true,
-    component: editWord,
 
 
   },

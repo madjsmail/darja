@@ -29,7 +29,7 @@
           <h3>
             Most searched word
           </h3>
-          <div class="suggestion">
+          <!-- <div class="suggestion">
             <ul>
               <li>
                 <router-link
@@ -62,7 +62,7 @@
                 ranak
               </li>
             </ul>
-          </div>
+          </div> -->
         </div>
         <div class="feedback" v-if="filterWord.length != 0">
           <p>
@@ -169,6 +169,7 @@ header {
     margin: 3em auto;
 
     input {
+      z-index: 1;
       background-color: #ffffff00;
       border: none;
       border-bottom: 2px solid rgb(236, 236, 236);

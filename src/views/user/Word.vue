@@ -16,9 +16,7 @@
         <h2>
           {{ this.Word }}
         </h2>
-        <span>
-          Add by {{user}}
-        </span>
+        <span> Add by {{ user }} </span>
       </header>
       <section class="grid-container">
         <div class="definition">
@@ -123,7 +121,7 @@ export default {
       definition: null,
       Synonyms: null,
       Willaya: null,
-      user : null ,
+      user: null,
       louading: true,
       Admin: false,
       feedback: null,
@@ -177,6 +175,19 @@ export default {
         })
         .catch(function(error) {
           console.error("Error removing document: ", error);
+        });
+    },
+    approveWord() {
+      const T = this;
+
+      db.collection("Words")
+        .doc(this.Word.toLowerCase())
+        .update({
+          statu: "Approved",
+        })
+        .then(function() {
+          T.feedback = "Document successfully updated!";
+          T.done = true;
         });
     },
     isAdmin() {

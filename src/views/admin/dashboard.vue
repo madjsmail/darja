@@ -1,11 +1,12 @@
 <template>
-  <header>
-    <button @click="getWords" class="btn">
-      get Words
-    </button>
-  </header>
+  <div>
+    <header>
+      <button @click="getWords" class="btn">
+        get Words
+      </button>
+    </header>
 
-   <main class="search">
+    <main class="search">
       <!-- <div v-if="feedback_search">
         <div class="feedback" v-if="filterWord.length == 0">
           <p>no results found</p>
@@ -27,7 +28,7 @@
         <div class="card_content" v-html="word.definition.slice(0, 100)"></div>
         <router-link
           v-bind:to="{
-            name: 'editWord',
+            name: 'word',
             params: {
               Word: word.Word,
             },
@@ -36,21 +37,22 @@
           >See More</router-link
         >
       </div>
-    </main> 
+    </main>
+  </div>
 </template>
 
 <script>
-import db from '../../firebase/init'
+import db from "../../firebase/init";
 export default {
   name: "dashboard",
   data() {
     return {
-      words :Array,
-      filterWord :Array
+      words: Array,
+      filterWord: Array,
     };
   },
   mounted() {
-    var Words=[] ;
+    var Words = [];
     db.collection("Words")
       .where("statu", "==", "waiting")
       .get()
@@ -68,11 +70,12 @@ export default {
         });
       });
 
-      this.words = Words ;
-  },methods: {
-    getWords(){
-      this.filterWord = this.words ;
-    }
+    this.words = Words;
+  },
+  methods: {
+    getWords() {
+      this.filterWord = this.words;
+    },
   },
 };
 </script>
