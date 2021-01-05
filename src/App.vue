@@ -22,7 +22,9 @@
     <li v-if="Admin">
       <router-link to="/dashboard">dashboard</router-link>
     </li>
-    <li @click="logOut"><router-link to="/">log out</router-link></li>
+    <li v-if="isAuth" @click="logOut">
+      <router-link to="/">log out</router-link>
+    </li>
     <!-- <li><router-link to="/about">About</router-link></li> -->
   </ul>
 
@@ -59,6 +61,7 @@ export default {
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.
+        T.isAuth = true;
         firebase
           .auth()
           .currentUser.getIdTokenResult()
@@ -78,6 +81,7 @@ export default {
           });
       } else {
         // No user is signed in.
+        T.isAuth = false;
         T.Admin = false;
       }
     });
@@ -193,7 +197,7 @@ ul {
     li {
       display: flex;
       height: 50px;
-      margin-left: .9em;
+      margin-left: 0.9em;
       a {
         font-size: 20px;
       }
