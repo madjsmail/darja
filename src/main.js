@@ -11,5 +11,4 @@ import 'firebase/auth'
 
 
 
-
 createApp(App).use(router).mount('#app')

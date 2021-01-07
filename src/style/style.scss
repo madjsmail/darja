@@ -251,6 +251,11 @@ header {
   }
 }
 
+.definition {
+
+  overflow-wrap: break-word;
+  overflow-y: auto;
+}
 
 .form_container {
   width: 90vw;
@@ -263,6 +268,7 @@ header {
     width: 90vw;
     display: flex;
     flex-direction: column;
+
 
     input,
     textarea {
@@ -294,6 +300,12 @@ header {
 
   }
 
+  .input_definition {
+    grid-column: span 2;
+    width: 92vw;
+    height: 230px;
+
+  }
 
 
 }
@@ -506,9 +518,11 @@ header {
     //     "origine exampl";
   }
 
-  // .definition {
-  //   grid-area: definition;
-  // }
+  .definition {
+    grid-row: 1/4;
+    overflow-wrap: break-word;
+    overflow-y: auto;
+  }
 
   // .origine {
   //   grid-area: origine;
@@ -523,9 +537,20 @@ header {
   // }
 
   .form_container {
+    box-sizing: border-box;
     width: 90vw;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    position: relative;
+
+    .input_definition {
+      width: 87vw !important;
+      display: flex;
+      flex-direction: column;
+      height: 200px;
+      max-height: 200px;
+
+    }
 
     .input {
       width: 90%;
@@ -545,6 +570,10 @@ header {
 
 
 
+    }
+
+    .footer {
+      margin-top: 1em;
     }
 
     #button {
@@ -661,6 +690,8 @@ header {
   width: 100%;
   display: flex;
   position: relative;
+  bottom: 0;
+  justify-content: center;
   justify-content: space-between;
 
   .btn {
@@ -736,4 +767,45 @@ header {
       text-shadow: 1px 1px 2px #d47e6c;
     }
   }
+}
+
+
+
+.ck.ck-reset_all,
+.ck.ck-reset_all * {
+  color: #ffffff;
+  background-color: #111111;
+
+}
+
+.ck.ck-editor__main>.ck-editor__editable {
+  border-color: #1d1d11;
+  max-height: 200px;
+  height: 200px;
+  overflow-y: scroll;
+  background-color: #111111;
+}
+
+.ck.ck-editor__main>.ck-editor__editable:not(.ck-focused) {
+  border-color: #111111;
+}
+
+.ck.ck-editor__main>.ck-editor__editable:focus {
+  border-color: #1d1d11;
+
+
+}
+
+.ck-rounded-corners .ck.ck-editor__main>.ck-editor__editable,
+.ck.ck-editor__main>.ck-editor__editable.ck-rounded-corners {
+  /* border-radius: var(--ck-border-radius); */
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.ck.ck-toolbar {
+  background: #111111;
+  padding: 0 var(--ck-spacing-small);
+
+  border: none;
 }

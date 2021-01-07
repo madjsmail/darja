@@ -30,20 +30,21 @@
           <label for="Willaya">Willaya </label>
           <input type="text" name="Willaya" v-model="Willaya" id="Willaya" />
         </div>
-        <div class="input">
+        <div class="input input_definition ">
           <label for="definition">definition</label>
-
-          <textarea
-            name="definition"
-            id=""
-            rows="10"
-            cols=""
+          <ckeditor
+            :editor="editor"
             v-model="definition"
-          >
-          </textarea>
+            :config="editorConfig"
+          ></ckeditor>
+          <!-- <textarea name="definition" id="" rows="10" cols="" v-model="definition">
+      </textarea> -->
         </div>
       </div>
-      <div class="foter">
+      <div
+        class="footer"
+        style="position: absolute;"
+      >
         <button
           @submit.prevent
           v-on:click="updateColection"
@@ -60,10 +61,16 @@
 <script>
 import spinner from "../../components/spinner.vue";
 import db from "../../firebase/init";
+import CKEditor from "@ckeditor/ckeditor5-vue";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 //import router from "../../router";
 //import firebase from "firebase/app";
 export default {
-  components: { spinner },
+  components: {
+    spinner,
+
+    ckeditor: CKEditor.component,
+  },
   name: "_form",
   data() {
     return {
@@ -76,6 +83,24 @@ export default {
       feedback: "",
       louading: "",
       updated: false,
+      editor: ClassicEditor,
+      editorData: "<p>Content of the editor.</p>",
+      editorConfig: {
+        // The configuration of the editor.
+        toolbar: [
+          "heading",
+          "bold",
+          "italic",
+          "|",
+          "numberedList",
+          "blockQuote",
+          "|",
+          "undo",
+        ],
+        //   colors: [{ color: 'red' }],
+        // },
+        // style: [],
+      },
     };
   },
   mounted() {

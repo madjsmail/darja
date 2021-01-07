@@ -13,10 +13,12 @@
     </div>
     <div v-if="!louading && !done" class="container_word">
       <header class="word">
-        <h2>
+        <h2 style="color : #c27e10">
           {{ this.Word }}
         </h2>
-        <span> Add by {{ user }} </span>
+        <span>
+          Add by <span style="color : #f9a826"> {{ user }}</span>
+        </span>
       </header>
       <section class="grid-container">
         <div class="definition">
@@ -28,7 +30,7 @@
               <strong> تعريف </strong>
             </i>
           </header>
-          <p v-if="definition" v-html="definition"></p>
+          <div v-if="definition" v-html="definition"></div>
           <p v-else>no definition available</p>
         </div>
 

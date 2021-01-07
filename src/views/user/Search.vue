@@ -11,16 +11,7 @@
       </form>
     </header>
     <div class="spinner" v-if="louading">
-      <div class="lds-roller">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
+      <spinner />
     </div>
     <main class="search">
       <div v-if="feedback_search">
@@ -78,7 +69,7 @@
           <span> {{ word.Synonyms }} </span>
         </div>
         <hr />
-        <div class="card_content" v-html="word.definition.slice(0, 100)"></div>
+        <div class="card_content" v-html="word.definition.slice(0, 60)"></div>
         <router-link
           v-bind:to="{
             name: 'word',
@@ -96,10 +87,13 @@
 
 <script>
 import db from "../../firebase/init";
+import spinner from "@/components/spinner";
 
 export default {
   name: "Search",
-  components: {},
+  components: {
+    spinner,
+  },
   data: function() {
     return {
       feedback_search: false,
@@ -186,19 +180,21 @@ header {
   }
 }
 
+.card_content {
+  width: 80%;
+  height: 120px !important;
+  h2 {
+    margin: 0 !important;
+  }
+}
 
-    .card_content {
-      width: 80%;
-    }
-
-    a {
-      color: rgb(117, 117, 117);
-      position: absolute;
-      bottom: 0.4em;
-      text-decoration: underline;
-    }
-  
-
+a {
+  color: rgb(117, 117, 117);
+  position: absolute;
+  bottom: 0.4em;
+  right: 0.4em;
+  text-decoration: underline;
+}
 
 .suggestion {
   margin: 1em auto;

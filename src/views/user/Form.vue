@@ -26,14 +26,18 @@
       <label for="Willaya">Willaya </label>
       <input type="text" name="Willaya" v-model="Willaya" id="Willaya" />
     </div>
-    <div class="input">
+    <div class="input input_definition ">
       <label for="definition">definition</label>
-
-      <textarea name="definition" id="" rows="10" cols="" v-model="definition">
-      </textarea>
+      <ckeditor
+        :editor="editor"
+        v-model="definition"
+        :config="editorConfig"
+      ></ckeditor>
+      <!-- <textarea name="definition" id="" rows="10" cols="" v-model="definition">
+      </textarea> -->
     </div>
   </div>
-  <div class="foter">
+  <div class="footer">
     <button @submit.prevent v-on:click="addColection" id="button" type="submit">
       submit
     </button>
@@ -43,9 +47,13 @@
 <script>
 import db from "../../firebase/init";
 import firebase from "firebase/app";
+import CKEditor from "@ckeditor/ckeditor5-vue";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 export default {
   name: "Form",
-  components: {},
+  components: {
+    ckeditor: CKEditor.component,
+  },
   data() {
     return {
       user: firebase.auth().currentUser.displayName.toLowerCase(),
@@ -58,6 +66,24 @@ export default {
       definition: "",
       Willaya: "",
       feedback: "",
+      editor: ClassicEditor,
+      editorData: "<p>Content of the editor.</p>",
+      editorConfig: {
+        // The configuration of the editor.
+        toolbar: [
+          "heading",
+          "bold",
+          "italic",
+          "|",
+          "numberedList",
+          "blockQuote",
+          "|",
+          "undo",
+        ],
+        //   colors: [{ color: 'red' }],
+        // },
+        // style: [],
+      },
     };
   },
   methods: {
@@ -142,12 +168,10 @@ export default {
 };
 </script>
 
-<style>
-.foter {
-  width: 100vw;
-  position: relative;
-  display: flex;
-  justify-content: center;
+<style scoped>
+.footer {
+  position: absolute !important;
+  bottom: 0;
 }
 sup {
   color: red;
@@ -179,5 +203,9 @@ sup {
   border-radius: 4px;
   font-size: 16px;
   line-height: 24px;
+}
+
+.form_btn {
+  position: relative;
 }
 </style>
