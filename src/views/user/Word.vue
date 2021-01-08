@@ -23,37 +23,29 @@
       <section class="grid-container">
         <div class="definition">
           <header>
-            <i>
-              <strong> definition </strong>
-            </i>
-            <i>
-              <strong> تعريف </strong>
-            </i>
+            <strong> definition </strong>
+
+            <strong> تعريف </strong>
           </header>
+          <hr>
           <div v-if="definition" v-html="definition"></div>
           <p v-else>no definition available</p>
         </div>
 
         <div class="synonyms">
           <header>
-            <i>
-              <strong> synonyms </strong>
-            </i>
-            <i>
-              <strong> المرادفات </strong>
-            </i>
+            <strong> synonyms </strong>
+
+            <strong> المرادفات </strong>
           </header>
           <p v-if="Synonyms" v-html="Synonyms"></p>
           <p v-else>no Synonyms available</p>
         </div>
         <div class="origine">
           <header>
-            <i>
-              <strong> origine </strong>
-            </i>
-            <i>
-              <strong> الأصل </strong>
-            </i>
+            <strong> origine </strong>
+
+            <strong> الأصل </strong>
           </header>
 
           <p v-if="Origin" v-html="Origin"></p>
@@ -62,20 +54,17 @@
 
         <div class="willaya">
           <header>
-            <i>
-              <strong> willaya </strong>
-            </i>
-            <i>
-              <strong> ولاية </strong>
-            </i>
+            <strong> willaya </strong>
+
+            <strong> ولاية </strong>
           </header>
           <p v-if="Willaya" v-html="Willaya"></p>
           <p v-else>no Synonyms available</p>
         </div>
         <!-- <div class="exampl">
-        <i>
+        
           <strong> examples </strong>
-        </i>
+        
         <p v-if="Synonyms" v-html="Synonyms"></p>
         <p v-else>no Synonyms available</p>
       </div> -->

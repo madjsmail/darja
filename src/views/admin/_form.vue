@@ -41,10 +41,7 @@
       </textarea> -->
         </div>
       </div>
-      <div
-        class="footer"
-        style="position: absolute;"
-      >
+      <div class="footer" style="position: absolute;">
         <button
           @submit.prevent
           v-on:click="updateColection"
@@ -88,14 +85,13 @@ export default {
       editorConfig: {
         // The configuration of the editor.
         toolbar: [
-          "heading",
           "bold",
           "italic",
-          "|",
-          "numberedList",
-          "blockQuote",
-          "|",
+          "link",
           "undo",
+          "redo",
+          "numberedList",
+          "bulletedList",
         ],
         //   colors: [{ color: 'red' }],
         // },

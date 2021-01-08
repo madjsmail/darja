@@ -2,6 +2,44 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500&display=swap');
 
+:root {
+  --ck-color-base-foreground: #111111 !important;
+  --ck-color-base-background: #111111 !important;
+  --ck-color-base-border: #111111 !important;
+  --ck-color-base-action: #61b045;
+  --ck-color-base-focus: #a8a8a8 !important;
+  --ck-color-base-text: rgb(253, 253, 253) !important;
+  --ck-color-base-active: #585858 !important;
+  --ck-color-base-active-focus: #616161 !important;
+  --ck-color-base-error: #db3700 !important;
+  --ck-color-focus-border-coordinates: 208, 79%, 51% !important;
+  --ck-color-focus-outer-shadow: #bcdefb !important;
+  --ck-color-focus-disabled-shadow: rgba(119, 186, 248, 0.3) !important;
+  --ck-color-focus-error-shadow: rgba(255, 64, 31, 0.3) !important;
+  --ck-color-text: var(--ck-color-base-text) !important;
+  --ck-color-shadow-drop: rgba(0, 0, 0, 0.15) !important;
+  --ck-color-shadow-drop-active: rgba(0, 0, 0, 0.2) !important;
+  --ck-color-shadow-inner: rgba(0, 0, 0, 0.1) !important;
+  --ck-color-button-default-background: transparent !important;
+  --ck-color-button-default-hover-background: #494949 !important;
+  --ck-color-button-default-active-background: #111111 !important;
+  --ck-color-button-default-active-shadow: #302f2f !important;
+  --ck-color-button-default-disabled-background: transparent !important;
+  --ck-color-button-on-background: #504f4f !important;
+  --ck-color-button-on-hover-background: #c4c4c4 !important;
+  --ck-color-button-on-active-background: #bababa !important;
+  --ck-color-button-on-active-shadow: #a1a1a1 !important;
+  --ck-color-input-border: #111111 !important;
+  --ck-color-input-disabled-background: #f2f2f2 !important;
+  --ck-color-input-disabled-border: #111111 !important;
+  --ck-color-input-disabled-text: #757575 !important;
+}
+
+
+
+
+
+
 body {
   margin: 0;
   padding: 0;
@@ -239,10 +277,12 @@ header {
     text-align: right;
   }
 
-  strong {
-    font-size: 1.5em;
-    text-transform: capitalize;
+  header {
+    strong {
+      font-size: 1.5em;
+      text-transform: capitalize;
 
+    }
   }
 
   hr {
@@ -772,42 +812,10 @@ header {
 }
 
 
-
-.ck.ck-reset_all,
-.ck.ck-reset_all * {
-  color: #ffffff;
-  background-color: #111111;
-
-}
-
 .ck.ck-editor__main>.ck-editor__editable {
   border-color: #1d1d11;
   max-height: 200px;
   height: 200px;
   overflow-y: scroll;
   background-color: #111111;
-}
-
-.ck.ck-editor__main>.ck-editor__editable:not(.ck-focused) {
-  border-color: #111111;
-}
-
-.ck.ck-editor__main>.ck-editor__editable:focus {
-  border-color: #1d1d11;
-
-
-}
-
-.ck-rounded-corners .ck.ck-editor__main>.ck-editor__editable,
-.ck.ck-editor__main>.ck-editor__editable.ck-rounded-corners {
-  /* border-radius: var(--ck-border-radius); */
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
-
-.ck.ck-toolbar {
-  background: #111111;
-  padding: 0 var(--ck-spacing-small);
-
-  border: none;
 }
