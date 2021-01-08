@@ -16,10 +16,14 @@
   </div>
 
   <ul :class="active ? 'active' : ''">
-    <li><router-link to="/">Home</router-link></li>
-    <li><router-link to="/Search">search</router-link></li>
-    <li><router-link to="/Form">contribute</router-link></li>
-    <li v-if="Admin">
+    <li @click="active = false"><router-link to="/">Home</router-link></li>
+    <li @click="active = false">
+      <router-link to="/Search">search</router-link>
+    </li>
+    <li @click="active = false">
+      <router-link to="/Form">contribute</router-link>
+    </li>
+    <li v-if="Admin" @click="active = false" >
       <router-link to="/dashboard">dashboard</router-link>
     </li>
     <li v-if="isAuth" @click="logOut">
@@ -172,11 +176,9 @@ ul {
       align-items: flex-end;
     }
   }
-
 }
 
 @media (min-width: 1200px) {
-
 }
 
 .menu-btn {

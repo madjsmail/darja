@@ -2,11 +2,14 @@
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
+  "description": "## Project setup ``` npm install ```",
+  "author": "",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
+  "main": ".eslintrc.js",
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^24.0.0",
     "@ckeditor/ckeditor5-vue": "^2.0.1",
@@ -14,6 +17,7 @@
     "firebase": "^8.2.1",
     "firebase-admin": "^9.4.2",
     "html-webpack-plugin": "^5.0.0-alpha.17",
+    "register-service-worker": "^1.7.1",
     "vue": "^3.0.0",
     "vue-editor-js": "^2.0.2",
     "vue-quill-editor": "^3.0.6",
@@ -22,6 +26,7 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-pwa": "^4.5.10",
     "@vue/cli-plugin-router": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "@vue/compiler-sfc": "^3.0.0",
@@ -34,8 +39,5 @@
     "vue-minrich-editor": "^1.1.1",
     "webpack": "^4.44.2"
   },
-  "description": "## Project setup ``` npm install ```",
-  "main": ".eslintrc.js",
-  "author": "",
   "license": "ISC"
 }

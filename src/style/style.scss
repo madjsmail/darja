@@ -36,7 +36,9 @@
 }
 
 
-
+sup{
+  color: #721c24;
+}
 
 
 
@@ -818,4 +820,34 @@ header {
   height: 200px;
   overflow-y: scroll;
   background-color: #111111;
+}
+
+.error_msg {
+  width: 60vw;
+  height: 60px;
+  margin: 2em auto;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-content: center;
+  background-color: #f8d7da;
+  color: #721c24;
+  border-radius: 4px;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.up{
+  position: fixed;
+  fill: rgb(255, 255, 255);
+  right: 1em;
+  bottom: 1em;
+}
+
+
+
+@media  screen and (max-height: 0vh) {
+ body{
+   background-color: red;
+ }
 }

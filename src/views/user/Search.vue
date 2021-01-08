@@ -3,7 +3,13 @@
     <header>
       <form @submit.prevent class="form-input">
         <label> seach your word</label>
-        <input type="text" name="search" id="" required v-model="SEARCH" />
+        <input
+          type="text"
+          name="search"
+          id="search"
+          required
+          v-model="SEARCH"
+        />
 
         <button @submit.prevent type="" class="btn" @click="searchedWord">
           SEARCH
@@ -82,6 +88,15 @@
         >
       </div>
     </main>
+
+    <a href="" class="" @click="goUp">
+      <img
+        v-if="filterWord.length > 2"
+        src="@/assets/up.svg"
+        alt=""
+        class="up"
+      />
+    </a>
   </div>
 </template>
 
@@ -105,6 +120,13 @@ export default {
     };
   },
   methods: {
+    goUp() {
+      window.scroll({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      });
+    },
     searchedWord() {
       if (this.SEARCH) {
         this.louading = true;

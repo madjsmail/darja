@@ -6,6 +6,7 @@ import '../src/style/style.scss'
 import firebase from "firebase/app";
 import 'firebase/firestore';
 import 'firebase/auth'
+import './registerServiceWorker'
 
 
 
