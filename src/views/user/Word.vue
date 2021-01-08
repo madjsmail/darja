@@ -27,11 +27,10 @@
 
             <strong> تعريف </strong>
           </header>
-          <hr>
+          <hr />
           <div v-if="definition" v-html="definition"></div>
           <p v-else>no definition available</p>
         </div>
-
         <div class="synonyms">
           <header>
             <strong> synonyms </strong>
@@ -59,7 +58,7 @@
             <strong> ولاية </strong>
           </header>
           <p v-if="Willaya" v-html="Willaya"></p>
-          <p v-else>no Synonyms available</p>
+          <p v-else>no data available</p>
         </div>
         <!-- <div class="exampl">
         
